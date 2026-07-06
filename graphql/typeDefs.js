@@ -1,7 +1,6 @@
 
 
 const typeDefs = `#graphql
-  # ─── TIPOS ───────────────────────────────────────────────
 
   type Producto {
     id: ID!
@@ -24,7 +23,6 @@ const typeDefs = `#graphql
     updatedAt: String
   }
 
-  # ─── INPUTS (para mutations) ─────────────────────────────
 
   input ProductoInput {
     nombre: String!
@@ -54,8 +52,7 @@ const typeDefs = `#graphql
     descripcion: String
   }
 
-  # ─── QUERIES ─────────────────────────────────────────────
-  # Equivalencias REST anotadas en cada query
+
 
   type Query {
     productos(
@@ -68,39 +65,24 @@ const typeDefs = `#graphql
       offset: Int
     ): [Producto]
 
-    # REST: GET /api/productos/:id
     producto(id: ID!): Producto
 
-    # REST: GET /api/categorias?limit=&offset=
     categorias(limit: Int, offset: Int): [Categoria]
 
-    # REST: GET /api/categorias/:id
     categoria(id: ID!): Categoria
-
-    # REST: GET /api/productos?categoria=ID
     productosPorCategoria(categoriaId: ID!): [Producto]
   }
 
-  # ─── MUTATIONS ───────────────────────────────────────────
-  # Equivalencias REST anotadas en cada mutation
-
   type Mutation {
-    # REST: POST /api/productos
     crearProducto(input: ProductoInput!): Producto
 
-    # REST: PUT /api/productos/:id
     actualizarProducto(id: ID!, input: ProductoUpdateInput!): Producto
 
-    # REST: DELETE /api/productos/:id
     eliminarProducto(id: ID!): String
 
-    # REST: POST /api/categorias
     crearCategoria(input: CategoriaInput!): Categoria
-
-    # REST: PUT /api/categorias/:id
     actualizarCategoria(id: ID!, input: CategoriaUpdateInput!): Categoria
 
-    # REST: DELETE /api/categorias/:id
     eliminarCategoria(id: ID!): String
   }
 `

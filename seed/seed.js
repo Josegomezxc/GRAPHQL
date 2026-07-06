@@ -15,7 +15,6 @@ async function seed() {
     await Categoria.deleteMany({})
     console.log('🧹 Colecciones limpiadas')
 
-    // Insertar categorías
     const categorias = await Categoria.insertMany([
       { nombre: 'Electrónica', descripcion: 'Dispositivos electrónicos y gadgets' },
       { nombre: 'Ropa', descripcion: 'Prendas de vestir y accesorios' },
@@ -23,12 +22,10 @@ async function seed() {
       { nombre: 'Deportes', descripcion: 'Equipamiento deportivo y fitness' },
       { nombre: 'Libros', descripcion: 'Libros físicos y digitales' },
     ])
-    console.log(`📁 ${categorias.length} categorías insertadas`)
+    console.log(` ${categorias.length} categorías insertadas`)
 
-    // Extraer IDs para referenciar en productos
     const [electronica, ropa, hogar, deportes, libros] = categorias
 
-    // Insertar productos (2 por categoría = 10 total)
     const productos = await Producto.insertMany([
       {
         nombre: 'Laptop Pro',
@@ -111,13 +108,13 @@ async function seed() {
         categoria: libros._id,
       },
     ])
-    console.log(`📦 ${productos.length} productos insertados`)
+    console.log(` ${productos.length} productos insertados`)
 
-    console.log('✅ Seed completado exitosamente')
+    console.log(' Seed completado exitosamente')
     await mongoose.connection.close()
     process.exit(0)
   } catch (error) {
-    console.error('❌ Error en el seed:', error.message)
+    console.error(' Error en el seed:', error.message)
     await mongoose.connection.close()
     process.exit(1)
   }

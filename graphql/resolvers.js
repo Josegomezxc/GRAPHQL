@@ -4,7 +4,6 @@ import Producto from '../models/Producto.js'
 import Categoria from '../models/Categoria.js'
 
 const resolvers = {
-  // ─── QUERIES ────────────────────────────────────────────
 
   Query: {
     productos: async (_, args) => {
@@ -51,11 +50,10 @@ const resolvers = {
     },
   },
 
-  // ─── MUTATIONS ──────────────────────────────────────────
+
 
   Mutation: {
     crearProducto: async (_, { input }) => {
-      // Mapeamos categoriaId del input al campo categoria del modelo
       const datos = { ...input, categoria: input.categoriaId }
       delete datos.categoriaId
       const producto = await Producto.create(datos)
